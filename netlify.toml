@@ -1,0 +1,3 @@
+# Netlify serves the game straight from the client folder. No build step.
+[build]
+  publish = "client"

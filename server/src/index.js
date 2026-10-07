@@ -17,7 +17,7 @@ export default {
       return env.GAME.get(id).fetch(request);
     }
 
-    return new Response('Sky Evade server is running', {
+    return new Response('Evade Hammond server is running', {
       headers: { 'content-type': 'text/plain' },
     });
   },

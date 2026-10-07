@@ -1,4 +1,4 @@
-name = "sky-evade-server"
+name = "sky-evade"
 main = "src/index.js"
 compatibility_date = "2025-09-01"
 

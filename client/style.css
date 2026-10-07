@@ -1,7 +1,7 @@
 :root {
   --ink: #141820;
   --panel: rgba(20, 24, 32, 0.55);
-  --red: #ff4d4d;
+  --red: #ff3b3b;
   --accent: #ffd24a;
 }
 
@@ -32,24 +32,62 @@ kbd {
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
 }
 
+/* Start screen */
+#start {
+  position: fixed; inset: 0; z-index: 10;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+  background: #2b2d31;
+}
+#start h1 { margin: 0; font-size: clamp(48px, 9vw, 96px); font-weight: 700; letter-spacing: 1px; }
+#startbtn {
+  padding: 22px 90px; border: 0; border-radius: 18px;
+  background: #fff; color: #2b2d31;
+  font: 700 42px Fredoka, "Trebuchet MS", sans-serif;
+  cursor: pointer; box-shadow: 0 7px 0 rgba(0, 0, 0, 0.35);
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+#startbtn:hover { transform: translateY(-2px); }
+#startbtn:active { transform: translateY(5px); box-shadow: 0 2px 0 rgba(0, 0, 0, 0.35); }
+#startmsg { margin: 0; font-size: 16px; opacity: 0.6; }
+
+#paused {
+  position: fixed; inset: 0; z-index: 5; display: grid; place-items: center;
+  background: rgba(20, 24, 32, 0.35); cursor: pointer;
+  font-size: 32px; font-weight: 700; text-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* In game */
 #hud { position: fixed; inset: 0; pointer-events: none; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.45); }
 
 #topleft { position: absolute; top: 14px; left: 16px; }
-#myname { font-size: 24px; font-weight: 700; }
-#online { font-size: 15px; opacity: 0.9; }
+#myname { font-size: 24px; font-weight: 700; text-shadow: 0 0 3px #000, 0 2px 4px rgba(0, 0, 0, 0.6); }
+#online, #note { font-size: 15px; opacity: 0.9; }
 #status { font-size: 15px; margin-top: 4px; }
-#status.bad { color: #ffe0e0; background: rgba(200, 30, 30, 0.6); padding: 4px 10px; border-radius: 8px; }
 
-#viewbar {
-  position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
-  display: flex; gap: 6px; padding: 5px; border-radius: 12px; background: var(--panel);
+#timer {
+  position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+  padding: 4px 18px; border-radius: 12px; background: var(--panel);
+  font-size: 34px; font-weight: 700; font-variant-numeric: tabular-nums;
 }
-#viewbar span { padding: 5px 12px; border-radius: 8px; font-size: 15px; font-weight: 600; opacity: 0.6; transition: all 0.15s; }
-#viewbar span.active { opacity: 1; background: rgba(255, 255, 255, 0.22); }
+#timer:empty { display: none; }
+
+#countdown { position: absolute; top: 22%; left: 50%; transform: translateX(-50%); text-align: center; }
+#countdown .num { font-size: 140px; font-weight: 700; line-height: 1; }
+#countdown .num.red { color: var(--red); }
+#countdown .num.white { color: #fff; }
+#countdown .sub { font-size: 22px; font-weight: 600; }
+
+#banner, #warn {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  font-weight: 700; opacity: 0; transition: opacity 0.25s;
+}
+#banner { top: 12%; font-size: 44px; }
+#warn { top: 60%; font-size: 56px; color: var(--red); letter-spacing: 2px; }
+#banner.show, #warn.show { opacity: 1; }
 
 #viewtoast {
-  position: absolute; top: 72px; left: 50%; transform: translate(-50%, -6px);
-  font-size: 30px; font-weight: 700; opacity: 0; transition: opacity 0.2s, transform 0.2s;
+  position: absolute; top: 110px; left: 50%; transform: translate(-50%, -6px);
+  font-size: 26px; font-weight: 700; opacity: 0; transition: opacity 0.2s, transform 0.2s;
 }
 #viewtoast.show { opacity: 1; transform: translate(-50%, 0); }
 
@@ -57,23 +95,34 @@ kbd {
 .feeditem { background: var(--panel); padding: 5px 12px; border-radius: 8px; font-size: 15px; transition: opacity 0.8s; }
 .feeditem.fade { opacity: 0; }
 
-#bigmsg { position: absolute; top: 16%; left: 50%; transform: translateX(-50%); text-align: center; }
-#bigmsg .title { font-size: 52px; font-weight: 700; letter-spacing: 1px; }
-#bigmsg .title.red { color: var(--red); }
-#bigmsg .sub { font-size: 22px; margin-top: 6px; }
-#bigmsg .hint { font-size: 16px; margin-top: 10px; opacity: 0.85; }
+#bigmsg { position: absolute; top: 24%; left: 50%; transform: translateX(-50%); text-align: center; }
+#bigmsg .title { font-size: 92px; font-weight: 700; letter-spacing: 2px; color: #fff; text-shadow: 0 0 6px #000, 0 4px 10px rgba(0, 0, 0, 0.6); }
+#bigmsg .sub { font-size: 26px; margin-top: 4px; }
+#bigmsg .hint { font-size: 17px; margin-top: 10px; opacity: 0.9; }
 
 #prompt { position: absolute; bottom: 120px; left: 50%; transform: translateX(-50%); text-align: center; }
 #prompt .line { font-size: 22px; font-weight: 600; margin: 4px 0; }
 #prompt .line.small { font-size: 17px; opacity: 0.9; }
 
+#role {
+  position: absolute; top: 70px; left: 50%; transform: translateX(-50%);
+  font-size: 19px; white-space: nowrap; text-align: center;
+}
+
 .bar { width: 240px; height: 12px; margin: 8px auto; border-radius: 6px; background: rgba(0, 0, 0, 0.4); overflow: hidden; }
 .bar div { height: 100%; background: var(--accent); transition: width 0.1s linear; }
 
+#viewbar {
+  position: absolute; bottom: 14px; left: 16px;
+  display: flex; gap: 6px; padding: 5px; border-radius: 12px; background: var(--panel);
+}
+#viewbar span { padding: 4px 10px; border-radius: 8px; font-size: 14px; font-weight: 600; opacity: 0.6; transition: all 0.15s; }
+#viewbar span.active { opacity: 1; background: rgba(255, 255, 255, 0.22); }
+
 #help {
   position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
-  display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
-  padding: 7px 14px; border-radius: 12px; background: var(--panel); font-size: 14px;
+  display: flex; gap: 12px; white-space: nowrap;
+  padding: 7px 14px; border-radius: 12px; background: var(--panel); font-size: 13px;
 }
 
 #crosshair {
@@ -81,22 +130,13 @@ kbd {
   border-radius: 50%; background: #fff; box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.35); pointer-events: none;
 }
 
-#vignette {
+/* Gets redder while you are bonked */
+#hurt {
   position: fixed; inset: 0; pointer-events: none; opacity: 0;
-  background: radial-gradient(ellipse at center, transparent 45%, rgba(230, 20, 20, 0.75) 100%);
-  transition: opacity 0.15s;
+  background: radial-gradient(ellipse at center, rgba(200, 0, 0, 0.35) 0%, rgba(170, 0, 0, 0.95) 100%);
+  transition: opacity 0.3s;
 }
 
-#overlay {
-  position: fixed; inset: 0; display: grid; place-items: center;
-  background: rgba(30, 80, 150, 0.35); cursor: pointer;
-}
-#overlay .card { text-align: center; text-shadow: 0 3px 8px rgba(0, 0, 0, 0.4); }
-#overlay h1 { font-size: 72px; margin: 0; letter-spacing: 2px; }
-#overlay p { font-size: 20px; margin: 6px 0; }
-#overlay .small { font-size: 15px; opacity: 0.85; }
-#overlay .play {
-  display: inline-block; margin: 22px 0 12px; padding: 14px 40px; border-radius: 14px;
-  background: #fff; color: var(--ink); font-size: 26px; font-weight: 700; text-shadow: none;
-  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.3);
+@media (max-width: 1000px) {
+  #help { display: none; }
 }
