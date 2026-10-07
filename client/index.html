@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sky Evade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js" } }
+  </script>
+</head>
+<body>
+  <div id="game"></div>
+  <div id="vignette"></div>
+  <div id="crosshair" class="hidden"></div>
+
+  <div id="hud">
+    <div id="topleft">
+      <div id="myname">Connecting</div>
+      <div id="online"></div>
+      <div id="status"></div>
+    </div>
+
+    <div id="viewbar">
+      <span id="v1"><kbd>1</kbd> First Person</span>
+      <span id="v3" class="active"><kbd>3</kbd> Third Person</span>
+    </div>
+    <div id="viewtoast"></div>
+
+    <div id="feed"></div>
+    <div id="bigmsg"></div>
+    <div id="prompt"></div>
+
+    <div id="help">
+      <span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> move</span>
+      <span><kbd>Space</kbd> jump</span>
+      <span><kbd>Shift</kbd> slide</span>
+      <span><kbd>R</kbd> revive</span>
+      <span><kbd>E</kbd> carry</span>
+      <span>Scroll to zoom</span>
+    </div>
+  </div>
+
+  <div id="overlay">
+    <div class="card">
+      <h1>SKY EVADE</h1>
+      <p>Run from the red thing. Revive your friends.</p>
+      <div class="play">Click to play</div>
+      <p class="small">Press Esc to get your mouse back</p>
+    </div>
+  </div>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>

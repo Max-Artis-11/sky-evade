@@ -1,0 +1,102 @@
+:root {
+  --ink: #141820;
+  --panel: rgba(20, 24, 32, 0.55);
+  --red: #ff4d4d;
+  --accent: #ffd24a;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #4fa9ff;
+  font-family: Fredoka, "Trebuchet MS", sans-serif;
+  color: #fff;
+  user-select: none;
+}
+#game, #game canvas { position: fixed; inset: 0; display: block; }
+
+.hidden { display: none !important; }
+
+kbd {
+  display: inline-block;
+  min-width: 1.6em;
+  padding: 0.05em 0.45em;
+  margin: 0 0.12em;
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  font: 600 0.85em Fredoka, sans-serif;
+  text-align: center;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
+}
+
+#hud { position: fixed; inset: 0; pointer-events: none; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.45); }
+
+#topleft { position: absolute; top: 14px; left: 16px; }
+#myname { font-size: 24px; font-weight: 700; }
+#online { font-size: 15px; opacity: 0.9; }
+#status { font-size: 15px; margin-top: 4px; }
+#status.bad { color: #ffe0e0; background: rgba(200, 30, 30, 0.6); padding: 4px 10px; border-radius: 8px; }
+
+#viewbar {
+  position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 6px; padding: 5px; border-radius: 12px; background: var(--panel);
+}
+#viewbar span { padding: 5px 12px; border-radius: 8px; font-size: 15px; font-weight: 600; opacity: 0.6; transition: all 0.15s; }
+#viewbar span.active { opacity: 1; background: rgba(255, 255, 255, 0.22); }
+
+#viewtoast {
+  position: absolute; top: 72px; left: 50%; transform: translate(-50%, -6px);
+  font-size: 30px; font-weight: 700; opacity: 0; transition: opacity 0.2s, transform 0.2s;
+}
+#viewtoast.show { opacity: 1; transform: translate(-50%, 0); }
+
+#feed { position: absolute; top: 14px; right: 16px; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.feeditem { background: var(--panel); padding: 5px 12px; border-radius: 8px; font-size: 15px; transition: opacity 0.8s; }
+.feeditem.fade { opacity: 0; }
+
+#bigmsg { position: absolute; top: 16%; left: 50%; transform: translateX(-50%); text-align: center; }
+#bigmsg .title { font-size: 52px; font-weight: 700; letter-spacing: 1px; }
+#bigmsg .title.red { color: var(--red); }
+#bigmsg .sub { font-size: 22px; margin-top: 6px; }
+#bigmsg .hint { font-size: 16px; margin-top: 10px; opacity: 0.85; }
+
+#prompt { position: absolute; bottom: 120px; left: 50%; transform: translateX(-50%); text-align: center; }
+#prompt .line { font-size: 22px; font-weight: 600; margin: 4px 0; }
+#prompt .line.small { font-size: 17px; opacity: 0.9; }
+
+.bar { width: 240px; height: 12px; margin: 8px auto; border-radius: 6px; background: rgba(0, 0, 0, 0.4); overflow: hidden; }
+.bar div { height: 100%; background: var(--accent); transition: width 0.1s linear; }
+
+#help {
+  position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+  padding: 7px 14px; border-radius: 12px; background: var(--panel); font-size: 14px;
+}
+
+#crosshair {
+  position: fixed; left: 50%; top: 50%; width: 6px; height: 6px; margin: -3px 0 0 -3px;
+  border-radius: 50%; background: #fff; box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.35); pointer-events: none;
+}
+
+#vignette {
+  position: fixed; inset: 0; pointer-events: none; opacity: 0;
+  background: radial-gradient(ellipse at center, transparent 45%, rgba(230, 20, 20, 0.75) 100%);
+  transition: opacity 0.15s;
+}
+
+#overlay {
+  position: fixed; inset: 0; display: grid; place-items: center;
+  background: rgba(30, 80, 150, 0.35); cursor: pointer;
+}
+#overlay .card { text-align: center; text-shadow: 0 3px 8px rgba(0, 0, 0, 0.4); }
+#overlay h1 { font-size: 72px; margin: 0; letter-spacing: 2px; }
+#overlay p { font-size: 20px; margin: 6px 0; }
+#overlay .small { font-size: 15px; opacity: 0.85; }
+#overlay .play {
+  display: inline-block; margin: 22px 0 12px; padding: 14px 40px; border-radius: 14px;
+  background: #fff; color: var(--ink); font-size: 26px; font-weight: 700; text-shadow: none;
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.3);
+}

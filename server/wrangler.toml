@@ -1,0 +1,12 @@
+name = "sky-evade-server"
+main = "src/index.js"
+compatibility_date = "2025-09-01"
+
+[[durable_objects.bindings]]
+name = "GAME"
+class_name = "GameRoom"
+
+# The free plan needs SQLite backed Durable Objects
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["GameRoom"]
